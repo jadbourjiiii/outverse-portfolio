@@ -4,6 +4,13 @@ import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 export async function PATCH(request, { params }) {
   try {
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { error: "Database not configured" },
+        { status: 503 }
+      );
+    }
+
     const id = params.id;
     const body = await request.json();
 
@@ -78,6 +85,13 @@ export async function PATCH(request, { params }) {
 
 export async function DELETE(request, { params }) {
   try {
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { error: "Database not configured" },
+        { status: 503 }
+      );
+    }
+
     const id = params.id;
 
     if (!id) {

@@ -8,19 +8,27 @@ import { supabaseAdmin } from "../lib/supabaseAdmin";
 import ProjectCarousel from "../components/ProjectCarousel";
 
 export default async function Home() {
-  const { data: projects, error } = await supabaseAdmin
-    .from("projects")
-    .select(
-      "id, name, category, description, image_url, gallery, status, created_at"
-    )
-    .eq("status", "Live")
-    .order("created_at", { ascending: false });
+  let liveProjects: any[] = [];
 
-  if (error) {
-    console.error("PUBLIC PROJECTS ERROR:", error);
+  if (supabaseAdmin) {
+    const { data: projects, error } = await supabaseAdmin
+      .from("projects")
+      .select(
+        "id, name, category, description, image_url, gallery, status, created_at"
+      )
+      .eq("status", "Live")
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("PUBLIC PROJECTS ERROR:", error);
+    }
+
+    liveProjects = projects || [];
+  } else {
+    console.warn(
+      "Supabase not configured; homepage project list is empty."
+    );
   }
-
-  const liveProjects = projects || [];
 
   return (
     <>
@@ -285,52 +293,26 @@ export default async function Home() {
               wish someone had taught us.
             </p>
 
-            <div className="grid3">
-              <div className="card course">
-                <span className="tag">Beginner</span>
+            <div className="coming-soon-wrapper">
+              <div className="card course course-coming-soon single-course-panel">
+                <span className="tag">Coming soon</span>
 
-                <h3>React Foundations</h3>
-
-                <p>
-                  Components, state, hooks and data fetching —
-                  by building a real dashboard app.
-                </p>
-
-                <div className="meta">
-                  <span>8 weeks · project-based</span>
-                  <span className="price">$149</span>
-                </div>
-              </div>
-
-              <div className="card course">
-                <span className="tag">Intermediate</span>
-
-                <h3>Next.js Mastery</h3>
+                <h3>New courses dropping soon</h3>
 
                 <p>
-                  Routing, SSR, server actions and deployment.
-                  Build a full production app end to end.
+                  We are building fresh practical tracks for
+                  founders, builders, and product teams.
                 </p>
 
-                <div className="meta">
-                  <span>10 weeks · project-based</span>
-                  <span className="price">$199</span>
-                </div>
-              </div>
+                <div className="loading-wrapper">
+                  <div className="loading-bar">
+                    <span className="loading-fill" />
+                  </div>
 
-              <div className="card course">
-                <span className="tag">Advanced</span>
-
-                <h3>Full-Stack Launchpad</h3>
-
-                <p>
-                  Databases, auth, payments and DevOps. The
-                  complete path from frontend to shipped product.
-                </p>
-
-                <div className="meta">
-                  <span>12 weeks · mentorship</span>
-                  <span className="price">$299</span>
+                  <div className="loading-meta">
+                    <span>Launch prep</span>
+                    <strong>90%</strong>
+                  </div>
                 </div>
                 
               </div>

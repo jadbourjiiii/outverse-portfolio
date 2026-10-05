@@ -4,12 +4,19 @@ import { SignJWT } from "jose";
 import { supabaseAdmin } from "../../../../lib/supabaseAdmin";
 
 const secret = new TextEncoder().encode(
-  process.env.SUPABASE_SERVICE_ROLE_KEY
+  process.env.SUPABASE_SERVICE_ROLE_KEY || ""
 );
 
 export async function POST(request) {
   try {
     const { username, password } = await request.json();
+
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { error: "Database not configured" },
+        { status: 503 }
+      );
+    }
 
     if (!username || !password) {
       return NextResponse.json(

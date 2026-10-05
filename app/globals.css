@@ -59,6 +59,49 @@ h3 {
   inset: 0;
   z-index: 0;
   pointer-events: none;
+  overflow: hidden;
+  background: transparent;
+}
+
+#stars::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 8% 18%, rgba(255,255,255,0.95) 0, transparent 100%),
+    radial-gradient(2px 2px at 20% 36%, rgba(255,255,255,0.9) 0, transparent 100%),
+    radial-gradient(1.5px 1.5px at 30% 12%, rgba(255,255,255,0.8) 0, transparent 100%),
+    radial-gradient(2px 2px at 42% 26%, rgba(255,255,255,0.9) 0, transparent 100%),
+    radial-gradient(1.5px 1.5px at 55% 18%, rgba(255,255,255,0.8) 0, transparent 100%),
+    radial-gradient(1.8px 1.8px at 68% 34%, rgba(255,255,255,0.95) 0, transparent 100%),
+    radial-gradient(1.5px 1.5px at 78% 14%, rgba(255,255,255,0.8) 0, transparent 100%),
+    radial-gradient(2px 2px at 90% 28%, rgba(255,255,255,0.9) 0, transparent 100%),
+    radial-gradient(1.5px 1.5px at 12% 57%, rgba(255,255,255,0.8) 0, transparent 100%),
+    radial-gradient(2px 2px at 26% 72%, rgba(255,255,255,0.95) 0, transparent 100%),
+    radial-gradient(1.8px 1.8px at 43% 66%, rgba(255,255,255,0.8) 0, transparent 100%),
+    radial-gradient(2px 2px at 58% 82%, rgba(255,255,255,0.95) 0, transparent 100%),
+    radial-gradient(1.5px 1.5px at 74% 68%, rgba(255,255,255,0.8) 0, transparent 100%),
+    radial-gradient(2px 2px at 86% 88%, rgba(255,255,255,0.9) 0, transparent 100%),
+    radial-gradient(1.5px 1.5px at 64% 52%, rgba(255,255,255,0.75) 0, transparent 100%),
+    radial-gradient(1.5px 1.5px at 46% 48%, rgba(255,255,255,0.75) 0, transparent 100%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  opacity: 0.95;
+  animation: starPulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes starPulse {
+  0% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.55;
+    transform: scale(1.04);
+  }
 }
 
 .container {
@@ -102,9 +145,7 @@ h3 {
   line-height: 1.7;
 }
 
-/* =========================================================
-   PUBLIC NAV
-   ========================================================= */
+
 
 nav:not(.admin-dashboard nav) {
   position: fixed;
@@ -219,9 +260,9 @@ nav:not(.admin-dashboard nav) {
   color: var(--muted);
 }
 
-/* =========================================================
+/* 
    HERO
-   ========================================================= */
+   */
 
 .hero {
   min-height: 100vh;
@@ -373,6 +414,82 @@ nav:not(.admin-dashboard nav) {
   flex-direction: column;
   gap: 26px;
   margin-top: 52px;
+}
+
+.coming-soon-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 52px;
+}
+
+.single-course-panel {
+  width: min(100%, 620px);
+}
+
+.course-coming-soon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 79, 79, 0.12),
+    rgba(255, 255, 255, 0.04)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.loading-wrapper {
+  margin-top: 18px;
+}
+
+.loading-bar {
+  position: relative;
+  width: 100%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.loading-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0%;
+  background: linear-gradient(90deg, #ff4d67, #ff8a5b, #ffd166);
+  border-radius: inherit;
+  animation: courseUpload 4s ease-in-out infinite;
+}
+
+.loading-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.loading-meta strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+@keyframes courseUpload {
+  0% {
+    width: 0%;
+  }
+  32% {
+    width: 55%;
+  }
+  72% {
+    width: 90%;
+  }
+  100% {
+    width: 0%;
+  }
 }
 
 /* =========================================================

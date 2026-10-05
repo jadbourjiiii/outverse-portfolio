@@ -4,6 +4,13 @@ import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 export async function GET() {
   try {
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { error: "Database not configured" },
+        { status: 503 }
+      );
+    }
+
     const { data, error } = await supabaseAdmin
       .from("projects")
       .select("*")
@@ -45,6 +52,13 @@ export async function POST(request) {
       return NextResponse.json(
         { error: "Project name is required" },
         { status: 400 }
+      );
+    }
+
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { error: "Database not configured" },
+        { status: 503 }
       );
     }
 
@@ -93,6 +107,13 @@ export async function DELETE(request) {
       return NextResponse.json(
         { error: "Project ID is required" },
         { status: 400 }
+      );
+    }
+
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { error: "Database not configured" },
+        { status: 503 }
       );
     }
 

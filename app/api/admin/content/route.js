@@ -4,6 +4,13 @@ import { supabaseAdmin } from "@/lib/supabaseAdmin";
 
 export async function GET() {
   try {
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { error: "Database not configured" },
+        { status: 503 }
+      );
+    }
+
     const { data, error } = await supabaseAdmin
       .from("site_content")
       .select("id, section, content_key, content_value, updated_at")
@@ -48,6 +55,13 @@ export async function PATCH(request) {
       typeof content_value === "string"
         ? content_value
         : String(content_value ?? "");
+
+    if (!supabaseAdmin) {
+      return NextResponse.json(
+        { error: "Database not configured" },
+        { status: 503 }
+      );
+    }
 
     const { data, error } = await supabaseAdmin
       .from("site_content")
