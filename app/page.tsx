@@ -262,7 +262,7 @@ export default async function Home() {
                 </p>
 
                 <a
-                  href="#contact"
+                  href="https://forms.gle/BQxzCCxJa98cmHAFA"
                   className="btn btn-red"
                   style={{ marginTop: 8 }}
                 >
@@ -332,7 +332,9 @@ export default async function Home() {
                   <span>12 weeks · mentorship</span>
                   <span className="price">$299</span>
                 </div>
+                
               </div>
+              
             </div>
           </div>
         </section>
