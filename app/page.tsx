@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import Stars from "../components/stars";
 import { supabaseAdmin } from "../lib/supabaseAdmin";
 import ProjectCarousel from "../components/ProjectCarousel";
+import IntroSplash from "../components/IntroSplash";
 
 export default async function Home() {
   let liveProjects: any[] = [];
@@ -32,6 +33,7 @@ export default async function Home() {
 
   return (
     <>
+      <IntroSplash />
       <Stars />
       <Navbar />
 
